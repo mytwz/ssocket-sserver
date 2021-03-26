@@ -1,0 +1,31 @@
+{
+  "name": "ssocket-sserver-node",
+  "version": "1.0.0",
+  "description": "SSocket + SServer  WebSocket  + 简易分布式消息服务",
+  "main": "./dist/index.js",
+  "types": "./types/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsc": "rm -fr ./dist & tsc --outDir ./dist",
+    "types": "rm -fr ./types & tsc -d --emitDeclarationOnly --allowJs false --declarationDir ./types"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mytwz/ssocket-sserver-node.git"
+  },
+  "keywords": [],
+  "author": "Summer.li",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mytwz/ssocket-sserver-node/issues"
+  },
+  "homepage": "https://github.com/mytwz/ssocket-sserver-node#readme",
+  "dependencies": {
+    "network-node-server": "^1.0.8",
+    "ssocket": "^1.0.50"
+  },
+  "devDependencies": {
+    "@types/node": "^14.14.21",
+    "@types/ws": "^7.4.0"
+  }
+}

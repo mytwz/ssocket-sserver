@@ -1,13 +1,11 @@
-![npm version](https://img.shields.io/badge/npm-1.0.0-brightgreen)
- > SSocket + SServer  WebSocket  + 简易分布式消息服务，服务对象继承于 Ssocket 项目对象，支持所有方法 觉得小弟写的还行的话，就给个[Star](https://github.com/mytwz/ssocket-sserver-node)⭐️吧~
-
-## 食用说明
-
-### [安装启动中心服务器](https://github.com/mytwz/network-node-szook)
-### [点击安装客户端程序](https://github.com/mytwz/ssocket-js)
-
-```javascript
-
+/*
+ * @Author: Summer
+ * @LastEditors: Summer
+ * @Description: 
+ * @Date: 2021-03-23 17:48:22 +0800
+ * @LastEditTime: 2021-03-25 16:25:59 +0800
+ * @FilePath: /ssocket-sserver-node/test/index.js
+ */
 const http = require("http")
 const WebSocekt = require("../");
 const app = new WebSocekt({
@@ -20,9 +18,9 @@ const app = new WebSocekt({
     /**本地网络Ip */
     ip: "10.9.16.24",
     /**WebSocket 端口号 */
-    websocket_port: 8082,
+    websocket_port: +process.argv[2],
     /**分布式消息服务的 端口号 */
-    sserver_port: 8081,
+    sserver_port: +process.argv[3],
     /**入网用户名 */
     username: "summer",
     /**入网帐号密码 */
@@ -30,12 +28,20 @@ const app = new WebSocekt({
     /**与中心服务器通信的签名Key */
     signKey: "signKey",
     /**中心服务地址 */
-    centralUrl: "http://10.9.16.24:8080"
+    centralUrl: "http://10.9.16.24:8080",
+    serverName:"summer"+process.argv[2]
+})
+
+app.router.ONPath("join", function(ctx, next){
+    ctx.app.join(ctx.socket.id, ctx.socket.roomid = ctx.data.roomid);
+    let { os, browser, device } = ctx.socket;
+    return { os, browser, device }
+})
+
+app.router.ONPath("message", function(ctx, next){
+    ctx.app.sendRoomMessage(ctx.socket.roomid, "message", ctx.data);
 })
 
 app.start(function () {
     console.log("启动成功")
 })
-
-
-```
